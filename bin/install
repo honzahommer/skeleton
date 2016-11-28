@@ -16,9 +16,9 @@ nvm install `nvm version-remote`
 
 if [ ! -d .git ]; then
   echo "Cloning repository..."
-  DIRECTORY="skeleton"
+  DIRECTORY="`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`"
   git clone https://github.com/honzahommer/skeleton "$DIRECTORY"
-  cd "$_"
+  cd "$DIRECTORY"
 fi
 
 echo "Run install..."
@@ -26,7 +26,6 @@ npm install
 
 if [ ! -z $DIRECTORY ]; then
   echo "Renaming directory..."
-  cd ..
-  mv "$DIRECTORY" "`cat .env | grep SITENAME | awk -F'=' '{print tolower($2)}' | tr ' ' '-'`"
-  cd "$_"
+  mv "../$DIRECTORY" "../`cat .env | grep SITENAME | awk -F'=' '{print tolower($2)}' | tr ' ' '-'`"
 fi
+
