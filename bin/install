@@ -6,38 +6,47 @@ echo "---------------------------------"
 echo
 
 echo "Installing nvm..."
-wget -qO- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+{
+  wget -qO- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash >/dev/null
+} >/dev/null
 
 echo "Reloading sources..."
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+{
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+} >/dev/null
 
 echo "Installing latest npm..."
-nvm install `nvm version-remote`
+{
+  nvm install `nvm version-remote`
+} >/dev/null
 
 if [ ! -d .git ]; then
-  DIR="`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`"
+  DIR="`wget -qO- names.hommer.cz`"
 
   echo "Cloning repository..."
-  git clone https://github.com/honzahommer/skeleton "$DIR"
-  cd "$_"
-
-  echo "Removing .git directory..."
-  rm -rf .git
+  {
+    git clone https://github.com/honzahommer/skeleton "$DIR"
+    cd "$DIR"
+    rm -rf ".git"
+  }
 
   echo "Creating git repository..."
-  git init
-  git add .
-  git commit -m"Batman! (this commit has no parents)"
+  {
+    git init
+    git add .
+    git commit -m"Batman! (this commit has no parents)"
+  } >/dev/null
 fi
 
 echo "Run install..."
 npm install
 
 if [ ! -z $DIR ]; then
-  echo "Renaming directory..."
-  cd ..
-  mv "$DIR" "`cat .env | grep SITENAME | awk -F'=' '{print tolower($2)}' | tr ' ' '-'`"
-  cd "$_"
+  {
+    cd ".."
+    mv "$DIR" "`cat $DIR/.env | grep SITENAME | awk -F'=' '{print tolower($2)}' | tr ' ' '-'`"
+    cd "$DIR"
+  } >/dev/null
 fi
 
