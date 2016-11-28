@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo "---------------------------------"
+echo "|          Preinstall           |"
+echo "---------------------------------"
+echo
+
+echo "Installing npm packages... "
+npm install -g grunt-cli >/dev/null
+
+echo "Creating environment config... "
+cp -n .env.example .env

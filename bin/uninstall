@@ -1,0 +1,20 @@
+#!/bin/bash
+
+echo
+echo "---------------------------------"
+echo "|           Uninstall           |"
+echo "---------------------------------"
+echo
+
+PATH_ENV=.env
+
+if [ -f $PATH_ENV ]; then
+    . $PWD/$PATH_ENV
+
+    for f in $PATH_PUB $PATH_NPM $PATH_TMP $PATH_ENV; do
+        echo "Removing $f..."
+        rm -rf $f
+    done
+else
+    echo "Nothing to do..."
+fi

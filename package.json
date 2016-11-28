@@ -1,0 +1,49 @@
+{
+  "name": "skeleton",
+  "description": "Grunt workflow for HTML development.",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "bin/preinstall",
+    "postinstall": "bin/postinstall"
+  },
+  "unsafe-perm": true,
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/honzahommer/skeleton.git"
+  },
+  "author": "Honza Hommer <honza@hommer.cz> (https://honza.hommer.cz)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/honzahommer/skeleton/issues"
+  },
+  "homepage": "https://github.com/honzahommer/skeleton#README",
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "dotenv-safe": "^2.3.1",
+    "grunt": "^1.0.1",
+    "grunt-available-tasks": "^0.6.3",
+    "grunt-banner": "^0.6.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^1.0.2",
+    "grunt-contrib-htmlmin": "^2.0.0",
+    "grunt-contrib-imagemin": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-less": "^1.4.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-file-rev": "^1.0.2",
+    "grunt-include-replace": "^4.0.1",
+    "grunt-inline": "^0.3.6",
+    "grunt-listfiles": "^1.0.2",
+    "grunt-text-replace": "^0.4.0",
+    "grunt-uncss": "^0.6.1",
+    "grunt-usemin": "^3.1.1",
+    "imagemin-mozjpeg": "^5.1.0",
+    "jquery": "^3.1.1",
+    "load-grunt-tasks": "^3.5.0",
+    "time-grunt": "^1.4.0"
+  }
+}

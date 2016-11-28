@@ -1,0 +1,74 @@
+#!/bin/bash
+
+function form:input {
+  NAME=${1}
+  name=${NAME,,}
+  if [[ $NAME == PATH_* ]]; then
+    TITLE="Enter `echo $name | awk -F'_' '{print $2}'` directory name:"
+  else
+    TITLE="Enter $name:"
+  fi
+  VALUE=`cat .env | grep $NAME | awk -F'=' '{print $2}'`
+  INPUT=$(\
+    dialog --inputbox "$TITLE" 8 40 "$VALUE" \
+    3>&1 1>&2 2>&3 3>&- \
+  )
+
+  if [[ $NAME == PATH_* ]]; then
+    [[ $VALUE != $INPUT ]] && [[ -d $VALUE ]] && mv $VALUE $INPUT
+    [[ -d .gitignore ]] && sed -i -e "s/^\/$VALUE\//\/$INPUT\//g" .gitignore
+  fi
+
+  [[ -f .env ]] && sed -i -e "s/^$NAME=.*/$NAME=$INPUT/g" .env
+}
+
+function form:select {
+  local OPTIONS=(1 "Enable debug" on
+                 2 "Minify CSS and JS" off
+                 3 "Brings CSS, JS and images inline" off)
+  local SELECT=(dialog --separate-output --checklist "Select options:" 22 46 26)
+  local VALUES=$("${SELECT[@]}" "${OPTIONS[@]}" 2>&1 >/dev/tty)
+  local VALUE
+  clear
+
+  for VALUE in $VALUES; do
+    case $VALUE in
+      1)
+        sed -i -e "s/^DEBUG=.*/DEBUG=true/g" .env
+      ;;
+      2)
+        sed -i -e "s/^MINIFY=.*/MINIFY=true/g" .env
+      ;;
+      3)
+        sed -i -e "s/^INLINE=.*/INLINE=true/g" .env
+      ;;
+    esac
+  done
+}
+
+if [[ -z $DEBIAN_FRONTEND ]]; then
+  for VALUE in SITENAME HOSTNAME PATH_SRC PATH_PUB PATH_TMP; do
+    form:input $VALUE
+  done
+  form:select
+fi
+
+echo
+echo "---------------------------------"
+echo "|          Postinstall          |"
+echo "---------------------------------"
+echo
+
+cat .env
+echo
+
+echo "Running Grunt build task... "
+grunt build >/dev/null
+
+echo
+echo "---------------------------------"
+echo "|     Available Grunt tasks     |"
+echo "---------------------------------"
+echo
+
+grunt tasks | grep '=>'
