@@ -24,6 +24,13 @@ Install latest version of Node:
 nvm install `nvm version-remote`
 ```
 
+Clone repository and change directory:
+
+```sh
+git clone https://github.com/honzahommer/skeleton.git html-skeleton
+cd $_
+```
+
 Install Grunt environment and show available tasks:
 
 ```sh
