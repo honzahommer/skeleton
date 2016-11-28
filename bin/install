@@ -8,17 +8,27 @@ echo
 echo "Installing nvm..."
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 
-echo "Reloading .bashrc..."
-[ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
+echo "Reloading sources..."
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 echo "Installing latest npm..."
 nvm install `nvm version-remote`
 
 if [ ! -d .git ]; then
+  DIR="`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`"
+
   echo "Cloning repository..."
-  DIRECTORY="`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`"
-  git clone https://github.com/honzahommer/skeleton "$DIRECTORY"
-  cd "$DIRECTORY"
+  git clone https://github.com/honzahommer/skeleton "$DIR"
+  cd "$_"
+
+  echo "Removing .git directory..."
+  rm -rf .git
+
+  echo "Creating git repository..."
+  git init
+  git add .
+  git commit -m"Batman! (this commit has no parents)"
 fi
 
 echo "Run install..."
@@ -26,6 +36,8 @@ npm install
 
 if [ ! -z $DIRECTORY ]; then
   echo "Renaming directory..."
-  mv "../$DIRECTORY" "../`cat .env | grep SITENAME | awk -F'=' '{print tolower($2)}' | tr ' ' '-'`"
+  cd ..
+  mv "$DIR" "`cat .env | grep SITENAME | awk -F'=' '{print tolower($2)}' | tr ' ' '-'`"
+  cd "$_"
 fi
 
