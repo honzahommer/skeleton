@@ -46,7 +46,9 @@ if [ ! -z $DIR ]; then
   {
     cd ".."
     mv "$DIR" "`cat $DIR/.env | grep SITENAME | awk -F'=' '{print tolower($2)}' | tr ' ' '-'`"
-    cd "$DIR"
+    cd "$_"
+
+    sed -i -e 's/skeleton/'"$_"'/g' package.json
   } >/dev/null
 fi
 
