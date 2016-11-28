@@ -1,4 +1,4 @@
-# html-skeleton
+# skeleton
 > Grunt workflow for HTML development.
 
 
