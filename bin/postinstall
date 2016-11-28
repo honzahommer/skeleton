@@ -23,9 +23,9 @@ function form:input {
 }
 
 function form:select {
-  local OPTIONS=(1 "Enable debug" on
+  local OPTIONS=(1 "Enable debug" off
                  2 "Minify CSS and JS" off
-                 3 "Brings CSS, JS and images inline" off)
+                 3 "Brings CSS, JS and images inline" on)
   local SELECT=(dialog --separate-output --checklist "Select options:" 22 46 26)
   local VALUES=$("${SELECT[@]}" "${OPTIONS[@]}" 2>&1 >/dev/tty)
   local VALUE
