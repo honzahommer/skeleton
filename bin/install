@@ -34,7 +34,7 @@ fi
 echo "Run install..."
 npm install
 
-if [ ! -z $DIRECTORY ]; then
+if [ ! -z $DIR ]; then
   echo "Renaming directory..."
   cd ..
   mv "$DIR" "`cat .env | grep SITENAME | awk -F'=' '{print tolower($2)}' | tr ' ' '-'`"
