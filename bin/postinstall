@@ -51,6 +51,12 @@ if [[ -z $DEBIAN_FRONTEND ]]; then
     form:input $VALUE
   done
   form:select
+else
+  for VAR in DEBUG MINIFY INLINE SITENAME HOSTNAME PATH_SRC PATH_PUB PATH_TMP; do
+    VAL=`eval echo '$'$VAR`
+
+    [[ ! -z $VAL ]] && sed -i -e "s/^$VAR=.*/$VAR=$VAL/g" .env
+  done
 fi
 
 echo
