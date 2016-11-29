@@ -29,6 +29,7 @@ if [ ! -d .git ]; then
     git clone https://github.com/honzahommer/skeleton "$DIR"
     cd "$DIR"
     rm -rf ".git"
+    echo "# $DIR" > README.md
   }
 
   echo "Creating git repository..."
