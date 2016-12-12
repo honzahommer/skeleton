@@ -67,3 +67,28 @@ To build sources run Grunt **build** task:
 ```sh
 grunt build
 ```
+
+## Default skeleton directory structure
+
+```sh
+└── public                      # builded sources
+└── src
+    ├── fonts
+    ├── img
+    ├── js
+    │   └── main.js             # base JavaScript file
+    ├── less
+    │   ├── main.less           # base Less file
+    │   └── vendor
+    │       └── bootstrap.less  # Bootstrap skeleton
+    └── tpl
+        ├── index.html
+        └── partials
+            ├── footer.html
+            └── header.html
+```
+
+## Todo
+
+- [ ] [App.js](https://github.com/honzahommer/app-js)
+- [ ] [Handlebars](http://assemble.io/)
