@@ -68,13 +68,16 @@ echo
 cat .env
 echo
 
-echo "Running Grunt build task... "
-grunt build >/dev/null
+if [[ -z $DEBIAN_FRONTEND ]]; then
+  echo
+  echo "---------------------------------"
+  echo "|     Available Grunt tasks     |"
+  echo "---------------------------------"
+  echo
 
-echo
-echo "---------------------------------"
-echo "|     Available Grunt tasks     |"
-echo "---------------------------------"
-echo
+  grunt tasks | grep '=>'
+else
+  echo "Running Grunt build task... "
 
-grunt tasks | grep '=>'
+  grunt build >/dev/null
+fi

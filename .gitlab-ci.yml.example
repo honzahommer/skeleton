@@ -1,0 +1,16 @@
+image: node:4.2.2
+
+variables:
+  DEBIAN_FRONTEND: "noninteractive"
+
+pages:
+  cache:
+    paths:
+    - node_modules/
+  script:
+  - npm install
+  artifacts:
+    paths:
+    - public
+  only:
+    - master
