@@ -26,7 +26,7 @@ if [ ! -d .git ]; then
 
   echo "Cloning repository..."
   {
-    git clone https://github.com/honzahommer/skeleton "$DIR"
+    git clone https://github.com/honzahommer/skeleton.git "$DIR"
     cd "$DIR"
     rm -rf ".git"
     echo "# $DIR" > README.md

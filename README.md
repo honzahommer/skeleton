@@ -34,8 +34,22 @@ cd $_
 Install Grunt environment and show available tasks:
 
 ```sh
-npm install
+npm run setup
 ```
+
+Run local server for development:
+
+```sh
+npm run start
+```
+
+Build sources for production use:
+
+```sh
+npm run build
+```
+
+
 
 ## Environment variables
 

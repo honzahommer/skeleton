@@ -46,6 +46,24 @@ function form:select {
   done
 }
 
+echo "---------------------------------"
+echo "|          Preinstall           |"
+echo "---------------------------------"
+echo
+
+echo "Installing npm packages... "
+npm install -g grunt-cli >/dev/null
+npm install >/dev/null
+
+echo "Creating environment config... "
+cp -n .env.example .env
+
+echo
+echo "---------------------------------"
+echo "|         Configuration         |"
+echo "---------------------------------"
+echo
+
 if [[ -z $DEBIAN_FRONTEND ]]; then
   for VALUE in SITENAME HOSTNAME PATH_SRC PATH_PUB PATH_TMP; do
     form:input $VALUE
@@ -81,3 +99,4 @@ else
 
   grunt build >/dev/null
 fi
+

@@ -8,7 +8,9 @@ pages:
     paths:
     - node_modules/
   script:
+  - npm install -g grunt
   - npm install
+  - npm run build
   artifacts:
     paths:
     - public

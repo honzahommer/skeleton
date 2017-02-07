@@ -3,8 +3,10 @@
   "description": "Grunt workflow for HTML development.",
   "main": "index.js",
   "scripts": {
-    "preinstall": "bin/preinstall",
-    "postinstall": "bin/postinstall"
+    "setup": "bin/setup",
+    "start": "grunt serve",
+    "build": "grunt build",
+    "clear": "bin/clear"
   },
   "unsafe-perm": true,
   "repository": {
