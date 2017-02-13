@@ -1,18 +1,18 @@
-image: node:4.2.2
-
-variables:
-  DEBIAN_FRONTEND: "noninteractive"
+image: node:7.2.0
 
 pages:
   cache:
     paths:
     - node_modules/
+
   script:
-  - npm install -g grunt
+  - npm install -g grunt-cli
   - npm install
-  - npm run build
+  - cp -n .env.example .env
+  - grunt build
   artifacts:
     paths:
     - public
   only:
     - master
+
